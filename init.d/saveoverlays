@@ -12,9 +12,9 @@
 # Do NOT "set -e"
 #
 # Testing hints:
-#	sudo mount -o remount,ro / 
+#	sudo mount -o remount,ro /
 #	sudo env INIT_VERBOSE=yes /etc/init.d/saveoverlays stop
-#	cat /var/log/saveoverlays.log  
+#	cat /var/log/saveoverlays.log
 
 PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
 DESC="overlay filesystem sync"
@@ -29,12 +29,12 @@ LOGFILE=/var_org/log/$NAME.log
 ROOTLOG="${HOME}/$NAME.log"
 SYNCSIG="/.overlaysync"
 
-PRIORITYFILES=${PRIORITYFILES:-"/var/log/fake-hwclock.data /var/lib/domoticz/domoticz.db"}
+PRIORITYFILES=${PRIORITYFILES}
 DEFAULTFS=$(  awk '/^overlay/ { print $2 }' /proc/mounts )
 OVERLAYFS=${OVERLAYFS:-$DEFAULTFS}
 SYNCEXCLUDES=${SYNCEXCLUDES:-'--exclude *.leases'}
 SYNCFLAGS=${SYNCFLAGS:-"-avH --delete-after --inplace --no-whole-file"}
-KILLPROCS=${KILLPROCS:-"domoticz mosquitto"}
+KILLPROCS=${KILLPROCS}
 
 # Check if we are running with read-only root
 # ROROOT=$( mount | egrep '^/dev/.*on / .*ro,' )
@@ -93,7 +93,7 @@ function do_sync() {
 		then
 			for P in ${KILLPROCS}
 			do
-				for S in 3 5 5 
+				for S in 3 5 5
 				do
 					PID=$( pgrep -x "$P" )
 					[ -z "${PID}" ] && break
@@ -135,9 +135,9 @@ function do_sync() {
 			echo "$NAME sync ${SOURCE} to ${DEST} with options ${SYNCFLAGS} ${SYNCEXCLUDES} at $( date )" >> ${TMPLOG}
 			if [ -d "${SOURCE}${SYNCSIG}" -a -d "${DEST}${SYNCSIG}" ] && mkdir -p "${STAGE}" >> ${TMPLOG} 2>&1
 			then
-				echo "---- Staging to $STAGE ------"                    >> ${TMPLOG} 
+				echo "---- Staging to $STAGE ------"                    >> ${TMPLOG}
 				rsync ${SYNCFLAGS} ${SYNCEXCLUDES} ${SOURCE}/ ${STAGE}/ >> ${TMPLOG} 2>&1
-				echo "---- Copy to $DEST ------"                        >> ${TMPLOG} 
+				echo "---- Copy to $DEST ------"                        >> ${TMPLOG}
 				rsync ${SYNCFLAGS} ${SYNCEXCLUDES} ${STAGE}/  ${DEST}/  >> ${TMPLOG} 2>&1
 			else
 				log_action_msg "Skipping this step: ${SOURCE}${SYNCSIG} or ${DEST}${SYNCSIG} or ${STAGE} not available"

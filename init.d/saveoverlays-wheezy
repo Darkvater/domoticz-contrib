@@ -14,9 +14,9 @@
 # Do NOT "set -e"
 #
 # Testing hints:
-#	sudo mount -o remount,ro / 
+#	sudo mount -o remount,ro /
 #	sudo env INIT_VERBOSE=yes /etc/init.d/saveoverlays stop
-#	cat /var/log/saveoverlays.log  
+#	cat /var/log/saveoverlays.log
 
 PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
 DESC="overlay filesystem sync"
@@ -83,7 +83,7 @@ do_sync()
 			log_action_msg "Syncing ${SOURCE} to ${DEST} ..."
 			echo "----"                                      >> ${TMPLOG}
 			echo "$NAME sync ${SOURCE} to ${DEST} with options ${SYNCFLAGS} ${SYNCEXCLUDES} at `date`" >> ${TMPLOG}
-			if [ -d "${SOURCE}" -a -d "${DEST}" ] 
+			if [ -d "${SOURCE}" -a -d "${DEST}" ]
 			then
 				rsync ${SYNCFLAGS} ${SYNCEXCLUDES} ${SOURCE}/ ${DEST}/ >> ${TMPLOG} 2>&1
 			elif [ -f "${SOURCE}" ]

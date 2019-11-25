@@ -1,2 +1,3 @@
 # domoticz-contrib
-Contribution / added files for Domoticz home automation
+Clone of original domoticz-contrib repository with a few changes:
+- remove domoticz-specific functionality
