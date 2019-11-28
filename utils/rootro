@@ -8,8 +8,7 @@ OP="ro"
 for FS in / /boot
 do
 	OPT=$( awk "\$2==\"${FS}\" { print \$4 }" /proc/mounts )
-	if [[ $OPT =~ "${OP}," ]]
-	then
+	if [[ $OPT =~ (^|,)${OP}, ]]; then
 		echo "$PROG: ${FS} already ${OP}"
 	else
 		sudo mount -o remount,${OP} "${FS}" && echo "$PROG: ${FS} remounted ${OP}"
