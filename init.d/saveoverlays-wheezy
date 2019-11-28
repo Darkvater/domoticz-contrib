@@ -30,7 +30,7 @@ LOGFILE=/.var_org/log/$NAME.log
 
 SYNCDIRS=${SYNCDIRS:-$( mount | awk '/^overlay/ { print $3 ":"  $3 "_org" }' )}
 SYNCEXCLUDES=${SYNCEXCLUDES:-'--exclude .unionfs* --exclude .fuse_hidden* --exclude *.leases --exclude stats'}
-SYNCFLAGS=${SYNCFLAGS:-"-avH --delete-after --inplace --no-whole-file"}
+SYNCFLAGS=${SYNCFLAGS:-"-avH --links --delete-after --inplace --no-whole-file"}
 
 # Check if we are running with read-only root
 # ROROOT=$( mount | egrep '^/dev/.*on / .*ro,' )

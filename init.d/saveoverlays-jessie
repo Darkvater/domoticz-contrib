@@ -29,7 +29,7 @@ LOGFILE=/.var_org/log/$NAME.log
 
 OVERLAYFS=${OVERLAYFS:-$(  awk '/^overlay/ { print $2 }' /proc/mounts )}
 SYNCEXCLUDES=${SYNCEXCLUDES:-'--exclude *.leases'}
-SYNCFLAGS=${SYNCFLAGS:-"-avH --delete-after --inplace --no-whole-file"}
+SYNCFLAGS=${SYNCFLAGS:-"-avH --links --delete-after --inplace --no-whole-file"}
 KILLPROCS=${KILLPROCS}
 
 # Check if we are running with read-only root
