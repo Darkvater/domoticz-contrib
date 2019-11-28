@@ -5,3 +5,4 @@ Clone of original domoticz-contrib repository with a few changes:
 - fix bug where a mount point would not always be recognized properly as ro/rw due to regex being incomplete
   - e.g. rootro would also see a rw partition as ro if it had the option "remount-ro,..." in it
 - when syncing changes back to disk on restart do not follow links
+- the todo at https://www.domoticz.com/wiki/Setting_up_overlayFS_on_Raspberry_Pi is brilliant, but it's even better if it's automated ;)
